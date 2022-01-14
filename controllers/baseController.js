@@ -13,6 +13,37 @@ module.exports = {
             data : data
           })
     },
+    printPDF: async (req,res) => {
+      let data = await User.findAll()
+      console.log(data)
+      let renderData = []
+      data.map((item, index) => {
+          renderData.push(`<tr>
+          <td>
+              ${index + 1}
+          </td>
+          <td>
+             ${item.name}
+          </td>
+        </tr>`)
+      })
+      res.pdf(
+        `<table>
+        <th>
+           <tr>
+           <td>
+           No
+       </td>
+       <td>
+           Nama
+       </td>
+           </tr>
+        </th>
+        <tbody>
+            ${renderData}
+        </tbody>
+    </table>`);
+  },
     sum: (req, res) => {
         if(req.body.y && req.body.x) {
             res.status(200).json({

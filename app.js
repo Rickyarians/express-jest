@@ -2,7 +2,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+var pdf = require('express-html-to-pdf')
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 let coba = '';
@@ -11,7 +11,7 @@ let coba = '';
 // console.log(test)
 // console.log(test === test)
 var app = express();
-
+app.use(pdf.default)
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
