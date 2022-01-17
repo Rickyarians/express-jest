@@ -24,3 +24,25 @@ describe('GET /', () => {
     })
   })
 })
+
+describe('GET /', () => {
+  test("Return status: 200 and a hello world message", done => {
+    request(app).get('/userss').then(res => {
+        expect(res.statusCode).toBe(200)
+        expect(res.body).toHaveProperty('data')
+        expect(res.body).toEqual(
+            expect.objectContaining({
+              data: expect.arrayContaining([
+                  expect.objectContaining({
+                      id: expect.any(Number),
+                      name: expect.any(String)
+                  })
+              ])
+            }),
+          );
+      done()
+    })
+  })
+})
+
+
